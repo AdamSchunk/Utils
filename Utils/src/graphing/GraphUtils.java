@@ -8,13 +8,15 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
  
 public class GraphUtils extends JPanel {
-    int[] data = {
+    double[] data = {
         21, 14, 18, 03, 86, 88, 74, 87, 54, 77,
         61, 55, 48, 60, 49, 36, 38, 27, 20, 18
     };
+    
     final int PAD = 20;
     
-    public GraphUtils(int[] data) {
+    
+    public GraphUtils(double[] data) {
     	this.data = data;
     }
     
@@ -44,8 +46,8 @@ public class GraphUtils extends JPanel {
         }
     }
  
-    private int getMax() {
-        int max = -Integer.MAX_VALUE;
+    private double getMax() {
+        double max = -Double.MAX_VALUE;
         for(int i = 0; i < data.length; i++) {
             if(data[i] > max)
                 max = data[i];
@@ -63,7 +65,23 @@ public class GraphUtils extends JPanel {
     }
     
     public void savePlot(String dir) {
-    	JFrame f = new JFrame();
+    	
+    	JFrame frame = new JFrame();
+    	frame.setBackground(Color.WHITE);
+    	frame.setUndecorated(true);
+    	frame.add(this);
+    	frame.setSize(400,400);
+    	frame.setLocation(200,200);
+    	frame.setVisible(true);
+    	frame.pack();
+    	BufferedImage image = new BufferedImage(400, 400, BufferedImage.TYPE_INT_RGB);
+        Graphics2D graphics2D = image.createGraphics();
+        frame.paint(graphics2D);
+        graphics2D.dispose();
+    	frame.dispose();
+    	
+    	
+    	/*JFrame f = new JFrame();
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.add(this);
         f.setSize(400,400);
@@ -74,7 +92,7 @@ public class GraphUtils extends JPanel {
         BufferedImage image = new BufferedImage(400, 400, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics2D = image.createGraphics();
         
-        f.paint(graphics2D);
+        f.paint(graphics2D);*/
         
         try{ImageIO.write(image,"png",new File(dir));}catch (Exception e) {}
     }
