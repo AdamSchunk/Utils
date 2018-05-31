@@ -1,6 +1,6 @@
 package math;
 
-class ExponentialMovingAverage {
+public class ExponentialMovingAverage {
     private double alpha;
     private Double oldValue;
     public ExponentialMovingAverage(double alpha) {
